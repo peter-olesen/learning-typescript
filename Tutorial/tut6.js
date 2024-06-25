@@ -5,5 +5,5 @@ const employee = {
     name: "First and Last",
     department: "Marketing",
 };
-// employee.name = "Jessie";
+employee.name = "Jessie";
 console.log(employee);
