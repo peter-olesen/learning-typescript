@@ -1,6 +1,5 @@
 let totalWater:number = 0;
 
-
 // View Build
 const app = document.createElement('div');
 app.setAttribute('class', 'container');
@@ -20,7 +19,7 @@ app.appendChild(addWater500);
 
 addWater500.addEventListener('click', () => {
     totalWater +=500;
-    totalWaterElm.textContent = "Total: " + totalWater + " ml.";
+    updateTotalWater();
 });
 
 const addWater250 = document.createElement('button');
@@ -29,7 +28,7 @@ app.appendChild(addWater250);
 
 addWater250.addEventListener('click', () => {
     totalWater +=250;
-    totalWaterElm.textContent = "Total: " + totalWater + " ml.";
+    updateTotalWater();
 });
 
 const addWater100 = document.createElement('button');
@@ -38,7 +37,7 @@ app.appendChild(addWater100);
 
 addWater100.addEventListener('click', () => {
     totalWater +=100;
-    totalWaterElm.textContent = "Total: " + totalWater + " ml.";
+    updateTotalWater();
 });
 
 const addAmount = document.createElement('input');
@@ -47,19 +46,31 @@ app.appendChild(addAmount);
 
 const addAmountBtn = document.createElement('button');
 addAmountBtn.textContent = "Add";
-addAmountBtn.setAttribute('id', 'amount-btn')
+addAmountBtn.setAttribute('id', 'amount-btn');
 app.appendChild(addAmountBtn);
 
-const addWarning = document.createElement('p')
-addWarning.textContent = "Please add amount as numbers"
+const addWarning = document.createElement('p');
+addWarning.textContent = "Please add amount as numbers";
+addWarning.style.display = "none";
+app.appendChild(addWarning);
 
 addAmountBtn.addEventListener('click', () => {
     let inputtedValue = parseInt(addAmount.value, 10);
     if (!isNaN(inputtedValue)) {
-    totalWater +=inputtedValue;
-    totalWaterElm.textContent = "Total: " + totalWater + " ml.";
-    app.removeChild(addWarning);
+        totalWater += inputtedValue;
+        updateTotalWater();
+
+        if (addWarning.style.display === "block") {
+            addWarning.style.display = "none";
+        }
     } else {
-        app.appendChild(addWarning);
+        if (addWarning.style.display === "none") {
+            addWarning.style.display = "block";
+        }
     }
 });
+
+
+const updateTotalWater = () => {
+    totalWaterElm.textContent = "Total: " + totalWater + " ml.";
+}
