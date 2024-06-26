@@ -1,5 +1,40 @@
 let totalWater: number = 0;
 
+interface LogData {
+    totalWater: number;
+    logs: string[];
+}
+
+const getCurrentDate = (): string => {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
+}
+
+const loadData = () => {
+    const currentDate = getCurrentDate();
+    const storedData = localStorage.getItem(currentDate);
+    if (storedData) {
+        const data: LogData = JSON.parse(storedData);
+        totalWater = data.totalWater;
+        totalWaterElm.textContent = "Total: " + totalWater + " ml.";
+        data.logs.forEach((log: string) => {
+            const addedWater = document.createElement('p');
+            addedWater.textContent = log;
+            logContainer.insertBefore(addedWater, logContainer.firstChild);
+        });
+    }
+}
+
+const saveData = () => {
+    const currentDate = getCurrentDate();
+    const logs: string[] = Array.from(logContainer.children).map(child => (child as HTMLParagraphElement).textContent || '');
+    const data: LogData = {
+        totalWater: totalWater,
+        logs: logs
+    };
+    localStorage.setItem(currentDate, JSON.stringify(data));
+}
+
 const app = document.createElement('div');
 app.setAttribute('class', 'container');
 document.body.appendChild(app);
@@ -34,19 +69,20 @@ addWater250.addEventListener('click', () => {
     updateTotalWater(250);
 });
 
-const addWater100 = document.createElement('button');
-addWater100.innerText = "100 ml.";
-btnContainer.appendChild(addWater100);
+// const addWater100 = document.createElement('button');
+// addWater100.innerText = "100 ml.";
+// btnContainer.appendChild(addWater100);
 
-addWater100.addEventListener('click', () => {
-    totalWater += 100;
-    updateTotalWater(100);
-});
+// addWater100.addEventListener('click', () => {
+//     totalWater += 100;
+//     updateTotalWater(100);
+// });
 
 let closeCustom: HTMLParagraphElement | null = null;
 
 const customAmount = document.createElement('button');
 customAmount.textContent = "Custom";
+customAmount.setAttribute('id', 'customAmount')
 btnContainer.appendChild(customAmount);
 
 customAmount.addEventListener('click', () => {
@@ -121,4 +157,8 @@ const updateTotalWater = (amount: number) => {
     const addedWater = document.createElement('p');
     addedWater.textContent = `${currentTime} - Added amount: ${amount} ml.`;
     logContainer.insertBefore(addedWater, logContainer.firstChild);
+
+    saveData();
 };
+
+loadData();

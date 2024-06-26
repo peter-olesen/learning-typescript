@@ -1,5 +1,32 @@
 "use strict";
 let totalWater = 0;
+const getCurrentDate = () => {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
+};
+const loadData = () => {
+    const currentDate = getCurrentDate();
+    const storedData = localStorage.getItem(currentDate);
+    if (storedData) {
+        const data = JSON.parse(storedData);
+        totalWater = data.totalWater;
+        totalWaterElm.textContent = "Total: " + totalWater + " ml.";
+        data.logs.forEach((log) => {
+            const addedWater = document.createElement('p');
+            addedWater.textContent = log;
+            logContainer.insertBefore(addedWater, logContainer.firstChild);
+        });
+    }
+};
+const saveData = () => {
+    const currentDate = getCurrentDate();
+    const logs = Array.from(logContainer.children).map(child => child.textContent || '');
+    const data = {
+        totalWater: totalWater,
+        logs: logs
+    };
+    localStorage.setItem(currentDate, JSON.stringify(data));
+};
 const app = document.createElement('div');
 app.setAttribute('class', 'container');
 document.body.appendChild(app);
@@ -26,16 +53,17 @@ addWater250.addEventListener('click', () => {
     totalWater += 250;
     updateTotalWater(250);
 });
-const addWater100 = document.createElement('button');
-addWater100.innerText = "100 ml.";
-btnContainer.appendChild(addWater100);
-addWater100.addEventListener('click', () => {
-    totalWater += 100;
-    updateTotalWater(100);
-});
+// const addWater100 = document.createElement('button');
+// addWater100.innerText = "100 ml.";
+// btnContainer.appendChild(addWater100);
+// addWater100.addEventListener('click', () => {
+//     totalWater += 100;
+//     updateTotalWater(100);
+// });
 let closeCustom = null;
 const customAmount = document.createElement('button');
 customAmount.textContent = "Custom";
+customAmount.setAttribute('id', 'customAmount');
 btnContainer.appendChild(customAmount);
 customAmount.addEventListener('click', () => {
     if (!customContainer.contains(addAmount)) {
@@ -97,4 +125,6 @@ const updateTotalWater = (amount) => {
     const addedWater = document.createElement('p');
     addedWater.textContent = `${currentTime} - Added amount: ${amount} ml.`;
     logContainer.insertBefore(addedWater, logContainer.firstChild);
+    saveData();
 };
+loadData();
