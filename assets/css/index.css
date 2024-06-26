@@ -5,7 +5,7 @@
 
 .container {
   width: 400px;
-  height: 100vh;
+  height: 90vh;
   padding: 20px;
   border-radius: 25px;
   background: rgb(34, 193, 195);
@@ -50,7 +50,6 @@
 
 body {
   font-family: "Roboto", sans-serif;
-  /* margin: 0; */
   display: flex;
   justify-content: center;
 }

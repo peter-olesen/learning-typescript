@@ -53,13 +53,6 @@ addWater250.addEventListener('click', () => {
     totalWater += 250;
     updateTotalWater(250);
 });
-// const addWater100 = document.createElement('button');
-// addWater100.innerText = "100 ml.";
-// btnContainer.appendChild(addWater100);
-// addWater100.addEventListener('click', () => {
-//     totalWater += 100;
-//     updateTotalWater(100);
-// });
 let closeCustom = null;
 const customAmount = document.createElement('button');
 customAmount.textContent = "Custom";
