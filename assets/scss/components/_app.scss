@@ -1,6 +1,6 @@
 .container {
     width: 400px;
-    height: 400px;
+    min-height: 400px;
     padding: 20px;
     border-radius: 25px;
     background: rgb(34,193,195);
@@ -21,18 +21,31 @@
         text-decoration-style: wavy; 
     }
 
-    button:not(#amount-btn) {
+    button {
         margin: 0 0.5rem 0 0.5rem;
         padding: 1rem;
         border-radius: 20px;
         border: 0;
         background: $btn-blue;
         color: $white;
+        cursor: pointer;
     }
 
-    
+    #closeCustom {
+        cursor: pointer;
+    }
 
     input {
         margin-top: 1rem;
+        background: $btn-blue;
+        color: $white;
+        padding: 1rem;
+        border: 0;
+        border-radius: 20px;
+        outline: 0;
+
+        &::placeholder {
+            color: $white;
+        }
     }
 }

@@ -5,7 +5,7 @@
 
 .container {
   width: 400px;
-  height: 400px;
+  min-height: 400px;
   padding: 20px;
   border-radius: 25px;
   background: rgb(34, 193, 195);
@@ -23,16 +23,29 @@
   text-decoration-color: #89CFF0;
   text-decoration-style: wavy;
 }
-.container button:not(#amount-btn) {
+.container button {
   margin: 0 0.5rem 0 0.5rem;
   padding: 1rem;
   border-radius: 20px;
   border: 0;
   background: #0E5571;
   color: #FFFFFF;
+  cursor: pointer;
+}
+.container #closeCustom {
+  cursor: pointer;
 }
 .container input {
   margin-top: 1rem;
+  background: #0E5571;
+  color: #FFFFFF;
+  padding: 1rem;
+  border: 0;
+  border-radius: 20px;
+  outline: 0;
+}
+.container input::placeholder {
+  color: #FFFFFF;
 }
 
 body {

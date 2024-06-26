@@ -15,38 +15,64 @@ addWater500.innerText = "500 ml.";
 app.appendChild(addWater500);
 addWater500.addEventListener('click', () => {
     totalWater += 500;
-    updateTotalWater();
+    updateTotalWater(500);
 });
 const addWater250 = document.createElement('button');
 addWater250.innerText = "250 ml.";
 app.appendChild(addWater250);
 addWater250.addEventListener('click', () => {
     totalWater += 250;
-    updateTotalWater();
+    updateTotalWater(250);
 });
 const addWater100 = document.createElement('button');
 addWater100.innerText = "100 ml.";
 app.appendChild(addWater100);
 addWater100.addEventListener('click', () => {
     totalWater += 100;
-    updateTotalWater();
+    updateTotalWater(100);
+});
+let closeCustom = null;
+const customAmount = document.createElement('button');
+customAmount.textContent = "Custom";
+app.appendChild(customAmount);
+customAmount.addEventListener('click', () => {
+    if (!customContainer.contains(addAmount)) {
+        customContainer.appendChild(addAmount);
+    }
+    if (!customContainer.contains(addAmountBtn)) {
+        customContainer.appendChild(addAmountBtn);
+    }
+    if (!closeCustom) {
+        closeCustom = document.createElement('p');
+        closeCustom.innerText = "Close";
+        closeCustom.setAttribute('id', 'closeCustom');
+        customContainer.appendChild(closeCustom);
+        closeCustom.addEventListener('click', () => {
+            customContainer.removeChild(addAmount);
+            customContainer.removeChild(addAmountBtn);
+            if (closeCustom) {
+                customContainer.removeChild(closeCustom);
+                closeCustom = null;
+            }
+            addAmount.value = "";
+            addWarning.style.display = "none";
+        });
+    }
 });
 const addAmount = document.createElement('input');
-addAmount.placeholder = "Input your own amount";
-app.appendChild(addAmount);
+addAmount.placeholder = "Input amount";
 const addAmountBtn = document.createElement('button');
 addAmountBtn.textContent = "Add";
-addAmountBtn.setAttribute('id', 'amount-btn');
-app.appendChild(addAmountBtn);
 const addWarning = document.createElement('p');
 addWarning.textContent = "Please add amount as numbers";
 addWarning.style.display = "none";
 app.appendChild(addWarning);
 addAmountBtn.addEventListener('click', () => {
-    let inputtedValue = parseInt(addAmount.value, 10);
-    if (!isNaN(inputtedValue)) {
-        totalWater += inputtedValue;
-        updateTotalWater();
+    let inputtedValue = addAmount.value.trim();
+    if (/^\d+$/.test(inputtedValue)) {
+        const value = parseInt(inputtedValue, 10);
+        totalWater += value;
+        updateTotalWater(value);
         if (addWarning.style.display === "block") {
             addWarning.style.display = "none";
         }
@@ -57,6 +83,16 @@ addAmountBtn.addEventListener('click', () => {
         }
     }
 });
-const updateTotalWater = () => {
+const customContainer = document.createElement('div');
+customContainer.setAttribute('class', 'custom-container');
+app.appendChild(customContainer);
+const logContainer = document.createElement('div');
+logContainer.setAttribute('class', 'log-container');
+app.appendChild(logContainer);
+const updateTotalWater = (amount) => {
     totalWaterElm.textContent = "Total: " + totalWater + " ml.";
+    const currentTime = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    const addedWater = document.createElement('p');
+    addedWater.textContent = `${currentTime} - Added amount: ${amount} ml.`;
+    logContainer.insertBefore(addedWater, logContainer.firstChild);
 };
