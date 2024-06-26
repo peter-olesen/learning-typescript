@@ -11,7 +11,7 @@ const loadData = () => {
         const data = JSON.parse(storedData);
         totalWater = data.totalWater;
         totalWaterElm.textContent = "Total: " + totalWater + " ml.";
-        data.logs.forEach((log) => {
+        data.logs.reverse().forEach((log) => {
             const addedWater = document.createElement('p');
             addedWater.textContent = log;
             logContainer.insertBefore(addedWater, logContainer.firstChild);
