@@ -28,9 +28,6 @@
   color: #FFFFFF;
   cursor: pointer;
 }
-.container #closeCustom {
-  cursor: pointer;
-}
 .container input {
   margin-top: 1rem;
   background: #0E5571;
@@ -50,4 +47,5 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
 }

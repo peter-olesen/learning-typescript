@@ -64,7 +64,6 @@ addWater250.addEventListener('click', () => {
 let closeCustom = null;
 const customAmount = document.createElement('button');
 customAmount.textContent = "Custom";
-customAmount.setAttribute('id', 'customAmount');
 btnContainer.appendChild(customAmount);
 customAmount.addEventListener('click', () => {
     if (!customContainer.contains(addAmount)) {
@@ -91,6 +90,7 @@ customAmount.addEventListener('click', () => {
     }
 });
 const addAmount = document.createElement('input');
+addAmount.setAttribute('inputmode', 'numeric');
 addAmount.placeholder = "Input amount";
 const addAmountBtn = document.createElement('button');
 addAmountBtn.textContent = "Add";
