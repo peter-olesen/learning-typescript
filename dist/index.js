@@ -90,6 +90,7 @@ customAmount.addEventListener('click', () => {
     }
 });
 const addAmount = document.createElement('input');
+addAmount.setAttribute('type', 'text');
 addAmount.setAttribute('inputmode', 'numeric');
 addAmount.placeholder = "Input amount";
 const addAmountBtn = document.createElement('button');
