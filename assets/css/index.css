@@ -8,11 +8,7 @@
   height: 90vh;
   padding: 20px;
   border-radius: 25px;
-  background: rgb(34, 193, 195);
-  background: -moz-linear-gradient(0deg, rgb(34, 193, 195) 0%, rgb(45, 252, 253) 100%);
-  background: -webkit-linear-gradient(0deg, rgb(34, 193, 195) 0%, rgb(45, 252, 253) 100%);
-  background: linear-gradient(0deg, rgb(34, 193, 195) 0%, rgb(45, 252, 253) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#22c1c3",endColorstr="#2dfcfd",GradientType=1);
+  background: #FFFFFF;
 }
 .container h1, .container h2 {
   margin: 0;
@@ -53,4 +49,5 @@ body {
   font-family: "Roboto", sans-serif;
   display: flex;
   justify-content: center;
+  align-items: center;
 }

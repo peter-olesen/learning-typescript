@@ -9,6 +9,8 @@
 
     "background_color": "#0E87CC",
 
+    "orientation": "portrait",
+
     "description": "Simple Water Intake Tracker for those who have trouble getting enough water througout the day.",
     
     "icons": [{
