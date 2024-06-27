@@ -49,6 +49,7 @@
 }
 
 body {
+  background: #0E87CC;
   font-family: "Roboto", sans-serif;
   display: flex;
   justify-content: center;
