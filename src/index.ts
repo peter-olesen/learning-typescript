@@ -18,22 +18,31 @@ const loadData = () => {
         totalWater = data.totalWater;
         totalWaterElm.textContent = "Total: " + totalWater + " ml.";
 
-        data.logs.reverse().forEach((log: string) => {
-            const addedWater = document.createElement('p');
-            addedWater.textContent = log;
-            logContainer.insertBefore(addedWater, logContainer.firstChild);
+        data.logs.forEach((log: string) => {
+            const logEntry = createLogEntry(log);
+            logContainer.insertBefore(logEntry, logContainer.firstChild);
         });
     }
 }
 
 const saveData = () => {
     const currentDate = getCurrentDate();
-    const logs: string[] = Array.from(logContainer.children).map(child => (child as HTMLParagraphElement).textContent || '');
+    const logs: string[] = Array.from(logContainer.children).map(child => (child as HTMLDivElement).textContent || '').reverse();
     const data: LogData = {
         totalWater: totalWater,
         logs: logs
     };
     localStorage.setItem(currentDate, JSON.stringify(data));
+}
+
+const clearData = () => {
+    const currentDate = getCurrentDate();
+    localStorage.removeItem(currentDate);
+    totalWater = 0;
+    totalWaterElm.textContent = "Total: " + totalWater + " ml.";
+    while (logContainer.firstChild) {
+        logContainer.removeChild(logContainer.firstChild);
+    }
 }
 
 const app = document.createElement('div');
@@ -141,14 +150,43 @@ const logContainer = document.createElement('div');
 logContainer.setAttribute('class', 'log-container');
 app.appendChild(logContainer);
 
+const clearDataBtn = document.createElement('p');
+clearDataBtn.innerText = "Clear All Data";
+app.appendChild(clearDataBtn);
+
+clearDataBtn.addEventListener('click', clearData);
+
+const createLogEntry = (logText: string): HTMLDivElement => {
+    const logEntry = document.createElement('div');
+    const logContent = document.createElement('p')
+
+    logContent.textContent = logText;
+
+    logEntry.addEventListener('click', () => {
+        const match = logText.match(/Added amount: (\d+) ml\./);
+        if (match) {
+            const amount = parseInt(match[1], 10);
+            totalWater -= amount;
+            totalWaterElm.textContent = "Total: " + totalWater + " ml.";
+        }
+
+        logContainer.removeChild(logEntry);
+        saveData();
+    });
+
+    logEntry.appendChild(logContent)
+
+    return logEntry;
+}
+
 const updateTotalWater = (amount: number) => {
     totalWaterElm.textContent = "Total: " + totalWater + " ml.";
 
     const currentTime = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
 
-    const addedWater = document.createElement('p');
-    addedWater.textContent = `${currentTime} - Added amount: ${amount} ml.`;
-    logContainer.insertBefore(addedWater, logContainer.firstChild);
+    const logText = `${currentTime} - Added amount: ${amount} ml.`;
+    const logEntry = createLogEntry(logText);
+    logContainer.insertBefore(logEntry, logContainer.firstChild);
 
     saveData();
 };
