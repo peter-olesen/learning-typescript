@@ -1,0 +1,13 @@
+**TypeScript**
+
+### Teknologien forklaret
+TypeScript er et sprog udviklet af Microsoft, som bygger oven på JavaScript. Det tilføjer typer til sproget, hvilket hjælper med at finde fejl tidligt i udviklingsprocessen. Med TypeScript kan man skrive JavaScript, men med ekstra sikkerhed og funktioner, som gør koden mere pålidelig og lettere at vedligeholde.
+
+### Formål med teknologien
+TypeScript er skabt for at gøre det lettere og sikrere at udvikle store applikationer. Ved at tilføje typer til JavaScript, kan udviklere finde fejl tidligt, inden koden kører. Det giver også bedre støtte i værktøjer som redigeringsprogrammer, hvilket gør det lettere at skrive og forstå koden.
+
+### Anvendelsesområder
+TypeScript bruges til mange ting inden for softwareudvikling. For eksempel i front-end udvikling, hvor det kan hjælpe med at skabe interaktive hjemmesider. Det bruges også på servere sammen med Node.js for at bygge sikre og skalerbare applikationer. Desuden anvendes TypeScript i udvikling af mobilapps og spil, hvor det giver en struktureret tilgang til koden.
+
+### Eventuelle forbedringer eller ønsker til teknologien
+Selvom TypeScript er meget nyttigt, er der altid plads til forbedringer. For eksempel kunne hurtigere kompilering og bedre integration med andre værktøjer gøre arbejdet lettere for udviklere. Derudover kunne mere omfattende dokumentation og læringsressourcer hjælpe nye brugere med at komme i gang med TypeScript.
